@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-
+const CreateOrder = "https://basiccrudcs519.azurewebsites.net/api/CreateOrder?";
 function App() {
   return (
     <div className="App">
