@@ -58,8 +58,9 @@ const submitOrder = (event) => {
     }
   const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(jsonData)
+      headers: {},
+      body: JSON.stringify(jsonData),
+      credentials: "include"
   };
   
    const url = "https://basiccrudcs519api.azure-api.net/basicCRUDcs519/CreateOrder?api_key=xfyjSUWjby4WW5wHS0ajFc9Sbpda0Ll1/7kE9kkI9ma+hzeh87SfKQ==";
