@@ -63,10 +63,13 @@ const submitOrder = (event) => {
       credentials: "include"
   };
   
-   const url = "https://basiccrudcs519api.azure-api.net/basicCRUDcs519/CreateOrder?api_key=xfyjSUWjby4WW5wHS0ajFc9Sbpda0Ll1/7kE9kkI9ma+hzeh87SfKQ==";
+   const url = "https://basiccrudcs519api.azure-api.net/basicCRUDcs519/CreateOrder?api_key=xfyjSUWjby4WW5wHS0ajFc9Sbpda0Ll1/7kE9kkI9ma+hzeh87SfKQ==715b54fdca9d47e8935925b78fd7fb5d";
    fetch(url, requestOptions).then(
     response => response.json()
-   ).then(data => console.log(data));
+   ).then(data => console.log(data)).catch(
+    function(error) {
+    console.log(error);
+    });
 };
 //{"ProductId":&emsp;&emsp;"3", "Product":&emsp;&emsp;"ShipNothing", "Operation":&emsp;&emsp;"Shipped", "ShipmentId":&emsp;&emsp;"NothingId", "Date":&emsp;&emsp;"today?", 
 //"Count":&emsp;&emsp;100, "InvoiceId":&emsp;&emsp;"NothingInvoice", "Recipient":&emsp;&emsp;"NotYourDad", "Address":&emsp;&emsp;"corner store", "Phone":&emsp;&emsp;"123456"}
