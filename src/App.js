@@ -44,6 +44,8 @@ setPhone(event.target.value);
 };
 
 const submitOrder = (event) => {
+  const request = require('request');
+  const subscriptionKey = "715b54fdca9d47e8935925b78fd7fb5d";
   const jsonData = {
       "ProductId": ProductId, 
       "Product": Product, 
@@ -56,6 +58,22 @@ const submitOrder = (event) => {
       "Address":Address, 
       "Phone":Phone
     }
+  let options = {
+      method: 'post',
+      baseUrl: 'basiccrudcs519api.azure-api.net',
+      url: '/basicCRUDcs519/CreateOrder',
+      qs: {
+      },
+      headers: {
+          'Ocp-Apim-Subscription-Key': subscriptionKey
+      },
+      body: JSON.stringify(jsonData),
+      json: true,
+  };
+  request(options, function(err, res, body){
+    console.log(JSON.stringify(body, null, 4));
+  });
+  /*
   const requestOptions = {
       method: 'POST',
       headers: {"Ocp-Apim-Subscription-Key":"715b54fdca9d47e8935925b78fd7fb5d"},
@@ -71,6 +89,7 @@ const submitOrder = (event) => {
     function(error) {
     console.log(error);
     });
+    */
 };
 //{"ProductId":&emsp;&emsp;"3", "Product":&emsp;&emsp;"ShipNothing", "Operation":&emsp;&emsp;"Shipped", "ShipmentId":&emsp;&emsp;"NothingId", "Date":&emsp;&emsp;"today?", "Count":&emsp;&emsp;100, "InvoiceId":&emsp;&emsp;"NothingInvoice", "Recipient":&emsp;&emsp;"NotYourDad", "Address":&emsp;&emsp;"corner store", "Phone":&emsp;&emsp;"123456"}
 return (
