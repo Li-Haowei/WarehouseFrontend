@@ -44,7 +44,7 @@ setPhone(event.target.value);
 };
 
 const submitOrder = (event) => {
-  const subscriptionKey = "715b54fdca9d47e8935925b78fd7fb5d";
+  const subscriptionKey = c86fdcdd30ef4f88b02679d30370c715;
   const jsonData = {
       "ProductId": ProductId, 
       "Product": Product, 
@@ -57,16 +57,16 @@ const submitOrder = (event) => {
       "Address":Address, 
       "Phone":Phone
     }
-  
+  const url = "https://basiccrudcs519api.azure-api.net/basicCRUDcs519/CreateOrder";
   const requestOptions = {
       method: 'POST',
+      Host: "basiccrudcs519api.azure-api.net",
       headers: {"Ocp-Apim-Subscription-Key":subscriptionKey},
       body: JSON.stringify(jsonData),
       credentials: "include"
   };
   
   
-   const url = "https://basiccrudcs519api.azure-api.net/basicCRUDcs519/CreateOrder?api_key=xfyjSUWjby4WW5wHS0ajFc9Sbpda0Ll1/7kE9kkI9ma+hzeh87SfKQ==";
    fetch(url, requestOptions).then(
     response => response.json()
    ).then(data => console.log(data)).catch(
