@@ -60,4 +60,4 @@ jobs:
           app-name: 'warehousefront'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9FB1E4DC8B3442058C04DB08AFAAA8A1 }}
-          package: .
+          package: release.zip
