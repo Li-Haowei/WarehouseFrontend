@@ -62,8 +62,7 @@ const submitOrder = (event) => {
       method: 'POST',
       //Host: "basiccrudcs519api.azure-api.net",
       //headers: {"Ocp-Apim-Subscription-Key":subscriptionKey},
-      body: JSON.stringify(jsonData),
-      credentials: "include"
+      body: JSON.stringify(jsonData)
   };
   
   
