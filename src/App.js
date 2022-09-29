@@ -43,9 +43,29 @@ const handlePhoneChange = event => {
 setPhone(event.target.value);
 };
 
-const submitOrder = (event, param) => {
-  console.log(event);
-  console.log(param);
+const submitOrder = (event) => {
+  const jsonData = {
+      "ProductId": ProductId, 
+      "Product": Product, 
+      "Operation": Operation, 
+      "ShipmentId": ShipmentId, 
+      "Date": Date, 
+      "Count": parseInt(Count), 
+      "InvoiceId": InvoiceId, 
+      "Recipient":Recipient, 
+      "Address":Address, 
+      "Phone":Phone
+    }
+  const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(jsonData)
+  };
+  
+   const url = "https://basiccrudcs519api.azure-api.net/basicCRUDcs519/CreateOrder";
+   fetch(url, requestOptions).then(
+    response => response.json()
+   ).then(data => console.log(data));
 };
 //{"ProductId":&emsp;&emsp;"3", "Product":&emsp;&emsp;"ShipNothing", "Operation":&emsp;&emsp;"Shipped", "ShipmentId":&emsp;&emsp;"NothingId", "Date":&emsp;&emsp;"today?", 
 //"Count":&emsp;&emsp;100, "InvoiceId":&emsp;&emsp;"NothingInvoice", "Recipient":&emsp;&emsp;"NotYourDad", "Address":&emsp;&emsp;"corner store", "Phone":&emsp;&emsp;"123456"}
@@ -217,7 +237,7 @@ return (
          </tr>
       </tbody>
    </table>
-   <button onClick={event => submitOrder(event, 'hello world')}>Submit</button>
+   <button onClick={event => submitOrder(event)}>Submit</button>
 </div>
 
 );
