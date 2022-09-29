@@ -2,16 +2,18 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 const CreateOrder = "https:&emsp;&emsp;//basiccrudcs519.azurewebsites.net/api/CreateOrder?";
 function App() {
-const [ProductId, setProductId] = useState(' ');
-const [Product, setProduct] = useState(' ');
-const [Operation, setOperation] = useState(' ');
-const [Date, setDate] = useState(' ');
-const [Count, setCount] = useState(' ');
-const [InvoiceId, setInvoiceId] = useState(' ');
-const [ShipmentId, setShipmentId] = useState(' ');
-const [Recipient, setRecipient] = useState(' ');
-const [Address, setAddress] = useState(' ');
-const [Phone, setPhone] = useState(' ');
+const [ProductId, setProductId] = useState('');
+const [Product, setProduct] = useState('');
+const [Operation, setOperation] = useState('');
+const [Date, setDate] = useState('');
+const [Count, setCount] = useState('');
+const [InvoiceId, setInvoiceId] = useState('');
+const [ShipmentId, setShipmentId] = useState('');
+const [Recipient, setRecipient] = useState('');
+const [Address, setAddress] = useState('');
+const [Phone, setPhone] = useState('');
+
+
 const handleProductIdChange = event => {
 setProductId(event.target.value);
 };
@@ -74,12 +76,52 @@ const submitOrder = (event) => {
     console.log(error);
     });
 };
-//{"ProductId":&emsp;&emsp;"3", "Product":&emsp;&emsp;"ShipNothing", "Operation":&emsp;&emsp;"Shipped", "ShipmentId":&emsp;&emsp;"NothingId", "Date":&emsp;&emsp;"today?", "Count":&emsp;&emsp;100, "InvoiceId":&emsp;&emsp;"NothingInvoice", "Recipient":&emsp;&emsp;"NotYourDad", "Address":&emsp;&emsp;"corner store", "Phone":&emsp;&emsp;"123456"}
+//use list of options to disable unneeded input fields
+const options = ["Shipped", "Received", "Returned"];
+const ifShipped = ["ShipmentId"];
+const ifReceived = ["Phone", "Address", "InvoiceId", "Recipient"];
+const ifReturned = ["Phone", "Address", "ShipmentId", "Recipient"];
+const optionClick = (event) => {
+   setOperation(event.target.id);
+   options.forEach(item => {
+      if(item!=Operation){
+         document.getElementById(item).checked = false;
+      }
+   });
+   switch(Operation){
+      case "Shipped":
+         ifShipped.forEach(item=> {
+            document.getElementById(item).value = "";
+            document.getElementById(item).disabled = true;
+         });
+         break;
+      case "Received":
+         ifReceived.forEach(item=> {
+            document.getElementById(item).value = "";
+            document.getElementById(item).disabled = true;
+         });
+         break
+      case "Returned":
+         ifReturned.forEach(item=> {
+            document.getElementById(item).value = "";
+            document.getElementById(item).disabled = true;
+         });
+         break
+      default:
+   }
+}
+//"ProductId" "Product" "Operation" "ShipmentId" "Date" "Count" "InvoiceId" "Recipient" "Address" "Phone"
 return (
 <div id='main-page'>
    <h1>
       This is the warehouse:
    </h1>
+   Your operation is: 
+   <div id="multipleOptions">
+      <input type="radio" id="Shipped" value="Red" onChange={optionClick}/>Shipped
+      <input type="radio" id="Received" value="Blue" onChange={optionClick}/>Received
+      <input type="radio" id="Returned" value="Yellow" onChange={optionClick}/>Returned
+   </div>
    <table>
       <thead>
          <tr>
@@ -92,7 +134,7 @@ return (
             <td>ProductId</td>
             <td><input
                type="text"
-               id="message"
+               id="ProductId"
                name="message"
                onChange={handleProductIdChange}
                value={ProductId}
@@ -102,7 +144,7 @@ return (
             <td>Product</td>
             <td><input
                type="text"
-               id="message"
+               id="Product"
                name="message"
                onChange={handleProductChange}
                value={Product}
@@ -112,17 +154,18 @@ return (
             <td>Operation</td>
             <td><input
                type="text"
-               id="message"
+               id="Operation"
                name="message"
                onChange={handleOperationChange}
                value={Operation}
+               list = "defaultOperations"
                /></td>
          </tr>
          <tr>
             <td>Date</td>
             <td><input
-               type="text"
-               id="message"
+               type="date"
+               id="Date"
                name="message"
                onChange={handleDateChange}
                value={Date}
@@ -131,8 +174,9 @@ return (
          <tr>
             <td>Phone</td>
             <td><input
-               type="text"
-               id="message"
+               type="tel"
+               id="Phone"
+               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                name="message"
                onChange={handlePhoneChange}
                value={Phone}
@@ -141,8 +185,8 @@ return (
          <tr>
             <td>Count</td>
             <td><input
-               type="text"
-               id="message"
+               type="number"
+               id="Count"
                name="message"
                onChange={handleCountChange}
                value={Count}
@@ -152,7 +196,7 @@ return (
             <td>ShipmentId</td>
             <td><input
                type="text"
-               id="message"
+               id="ShipmentId"
                name="message"
                onChange={handleShipmentIdChange}
                value={ShipmentId}
@@ -162,7 +206,7 @@ return (
             <td>InvoiceId</td>
             <td><input
                type="text"
-               id="message"
+               id="InvoiceId"
                name="message"
                onChange={handleInvoiceIdChange}
                value={InvoiceId}
@@ -172,7 +216,7 @@ return (
             <td>Recipient</td>
             <td><input
                type="text"
-               id="message"
+               id="Recipient"
                name="message"
                onChange={handleRecipientChange}
                value={Recipient}
@@ -182,7 +226,7 @@ return (
             <td>Address</td>
             <td><input
                type="text"
-               id="message"
+               id="Address"
                name="message"
                onChange={handleAddressChange}
                value={Address}
@@ -191,7 +235,7 @@ return (
       </tbody>
    </table>
    <h1>
-      This is the final form:
+      Result:
    </h1>
    <table>
       <thead>
@@ -243,7 +287,12 @@ return (
          </tr>
       </tbody>
    </table>
-   <button onClick={event => submitOrder(event)}>Submit</button>
+   <button id="submitFinalForm" onClick={event => submitOrder(event)}>Submit</button>
+   <datalist id="defaultOperations">
+   <option value="Shipped"></option>
+   <option value="Received"></option>
+   <option value="Returned"></option>
+   </datalist>
 </div>
 
 );
