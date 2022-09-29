@@ -42,6 +42,10 @@ setAddress(event.target.value);
 const handlePhoneChange = event => {
 setPhone(event.target.value);
 };
+
+submitOrder = () => {
+  console.log('submitted!');
+}
 //{"ProductId":&emsp;&emsp;"3", "Product":&emsp;&emsp;"ShipNothing", "Operation":&emsp;&emsp;"Shipped", "ShipmentId":&emsp;&emsp;"NothingId", "Date":&emsp;&emsp;"today?", 
 //"Count":&emsp;&emsp;100, "InvoiceId":&emsp;&emsp;"NothingInvoice", "Recipient":&emsp;&emsp;"NotYourDad", "Address":&emsp;&emsp;"corner store", "Phone":&emsp;&emsp;"123456"}
 return (
@@ -212,7 +216,7 @@ return (
          </tr>
       </tbody>
    </table>
-   <button>Submit</button>
+   <button onClick={this.submitOrder}>Submit</button>
 </div>
 
 );
