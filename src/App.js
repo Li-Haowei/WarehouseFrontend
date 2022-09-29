@@ -12,6 +12,7 @@ const [ShipmentId, setShipmentId] = useState('');
 const [Recipient, setRecipient] = useState('');
 const [Address, setAddress] = useState('');
 const [Phone, setPhone] = useState('');
+const [Task, setTask] = useState('');
 
 
 const handleProductIdChange = event => {
@@ -77,18 +78,20 @@ const submitOrder = (event) => {
     });
 };
 //use list of options to disable unneeded input fields
-const options = ["Shipped", "Received", "Returned"];
+const options = ["CreateOrder", "GetOrder", "DeleteOrder", "UpdateOrder"];
 const ifShipped = ["ShipmentId"];
 const ifReceived = ["Phone", "Address", "InvoiceId", "Recipient"];
 const ifReturned = ["Phone", "Address", "ShipmentId", "Recipient"];
 const optionClick = (event) => {
-   setOperation(event.target.id);
+   setTask(event.target.id);
    options.forEach(item => {
-      if(item!=Operation){
+      if(item!=Task){
          document.getElementById(item).checked = false;
       }
    });
-   switch(Operation){
+}
+const disableOptions = (event) => {
+   switch(event.target.value){
       case "Shipped":
          ifShipped.forEach(item=> {
             document.getElementById(item).value = "";
@@ -118,9 +121,10 @@ return (
    </h1>
    Your operation is: 
    <div id="multipleOptions">
-      <input type="radio" id="Shipped" value="Red" onChange={optionClick}/>Shipped
-      <input type="radio" id="Received" value="Blue" onChange={optionClick}/>Received
-      <input type="radio" id="Returned" value="Yellow" onChange={optionClick}/>Returned
+      <input type="radio" id="CreateOrder"  onChange={optionClick}/>CreateOrder
+      <input type="radio" id="GetOrder"  onChange={optionClick}/>GetOrder
+      <input type="radio" id="UpdateOrder"  onChange={optionClick}/>UpdateOrder
+      <input type="radio" id="DeleteOrder"  onChange={optionClick}/>DeleteOrder
    </div>
    <table>
       <thead>
@@ -156,7 +160,7 @@ return (
                type="text"
                id="Operation"
                name="message"
-               onChange={handleOperationChange}
+               onChange={function(event){handleOperationChange(event);disableOptions(event);}}
                value={Operation}
                list = "defaultOperations"
                /></td>
