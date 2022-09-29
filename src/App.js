@@ -44,7 +44,7 @@ setPhone(event.target.value);
 };
 
 const submitOrder = (event) => {
-  const subscriptionKey = c86fdcdd30ef4f88b02679d30370c715;
+  const subscriptionKey = "c86fdcdd30ef4f88b02679d30370c715";
   const jsonData = {
       "ProductId": ProductId, 
       "Product": Product, 
@@ -57,7 +57,7 @@ const submitOrder = (event) => {
       "Address":Address, 
       "Phone":Phone
     }
-  const url = "https://basiccrudcs519api.azure-api.net/basicCRUDcs519/CreateOrder";
+  
   const requestOptions = {
       method: 'POST',
       Host: "basiccrudcs519api.azure-api.net",
@@ -67,6 +67,7 @@ const submitOrder = (event) => {
   };
   
   
+   const url = "https://basiccrudcs519api.azure-api.net/basicCRUDcs519/CreateOrder";
    fetch(url, requestOptions).then(
     response => response.json()
    ).then(data => console.log(data)).catch(
