@@ -52,7 +52,7 @@ const requestOptions = {
 }
 const url = "https://basiccrudcs519api.azure-api.net/cosmos-function-app/get-list";
 fetch(url, requestOptions).then(
-   response => response.json()
+   response => console.log(response.json())
 ).then(data =>console.log(data)).catch(err => 
    console.log(err))
 //"ProductId" "Product" "Operation" "ShipmentId" "Date" "Count" "InvoiceId" "Recipient" "Address" "Phone"
