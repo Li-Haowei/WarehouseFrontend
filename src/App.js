@@ -12,28 +12,40 @@ const requestOptions = {
 }
 function loadData(data){
    var content = "";
+   content += "<table>"
+   content += "<thead>"
+   content += "<tr>"
+   content += "<th>ID</th>"
+   content += "<th>ProductId</th>"
+   content += "<th>Product</th>"
+   content += "<th>Operation</th>"
+   content += "<th>Date</th>"
+   content += "<th>Phone</th>"
+   content += "<th>Count</th>"
+   content += "<th>ShipmentId</th>"
+   content += "<th>InvoiceId</th>"
+   content += "<th>Recipient</th>"
+   content += "<th>Address</th>"
+   content += "</tr>"
+   content += "</thead>"
    data.forEach(element =>
       {
-         content +=  element.ProductId 
-         content += "&nbsp"
-         content +=  element.Product 
-         content += "&nbsp"
-         content +=  element.Operation 
-         content += "&nbsp"
-         content +=  element.Date 
-         content += "&nbsp"
-         content +=  element.Count 
-         content += "&nbsp"
-         content +=  element.ShipmentId 
-         content += "&nbsp"
-         content +=  element.InvoiceId 
-         content += "&nbsp"
-         content +=  element.Recipient 
-         content += "&nbsp"
-         content +=  element.Address 
-         content += <br></br>
+         content += "<tr>";
+         content += "<td>" + element._id + "</td>";
+         content += "<td>" + element.ProductId + "</td>";
+         content += "<td>" + element.Product + "</td>";
+         content += "<td>" + element.Operation + "</td>";
+         content += "<td>" + element.Date + "</td>";
+         content += "<td>" + element.Phone + "</td>";
+         content += "<td>" + element.Count + "</td>";
+         content += "<td>" + element.ShipmentId + "</td>";
+         content += "<td>" + element.InvoiceId + "</td>";
+         content += "<td>" + element.Recipient + "</td>";
+         content += "<td>" + element.Address + "</td>";
+         content += "</tr>"
       }
       );
+      content += "</table>"
       return content;
 }
 const url = "https://basiccrudcs519api.azure-api.net/cosmos-function-app/get-list";
