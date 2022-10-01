@@ -13,9 +13,10 @@ const requestOptions = {
 const url = "https://basiccrudcs519api.azure-api.net/cosmos-function-app/get-list";
 fetch(url, requestOptions).then(
    response => response.json()
-).then(data =>createTable(data)).catch(err => 
+).then(data =>setWarehouse(data)).catch(err => 
    console.log(err))
 //"ProductId" "Product" "Operation" "ShipmentId" "Date" "Count" "InvoiceId" "Recipient" "Address" "Phone"
+/*
 function createTable(data){
    console.log(data)
    setWarehouse(data);
@@ -36,18 +37,40 @@ function createTable(data){
       count += "</tr>"
 
    });
-   //document.getElementById('warehouse-table-body').innerHTML = content;
-}
-return (
-<div id='main-page'>
+   document.getElementById('warehouse-table-body').innerHTML = content;
    {JSON.stringify(warehouse) !== '[]'?
    <>
+   <table>
+      <thead>
+         <tr>
+            <th>ID</th>
+            <th>ProductId</th>
+            <th>Product</th>
+            <th>Operation</th>
+            <th>Date</th>
+            <th>Phone</th>
+            <th>Count</th>
+            <th>ShipmentId</th>
+            <th>InvoiceId</th>
+            <th>Recipient</th>
+            <th>Address</th>
+         </tr>
+      </thead>
+      <tbody id='WableBody'>
+        
+      </tbody>
+   </table>
    </>
    :
    <>
    <p>Loading Data</p>
    </>
    }
+}
+*/
+return (
+<div id='main-page'>
+   {warehouse}
 </div>
 
 );
