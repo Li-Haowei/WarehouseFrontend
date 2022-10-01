@@ -10,10 +10,31 @@ const [warehouse, setWarehouse] = useState([]);
 const requestOptions = {
    method: 'POST'
 }
+function loadData(data){
+   var content = "";
+   data.forEach(element =>
+      {
+         content += "<tr>";
+         content += "<td>" + element._id + "</td>";
+         content += "<td>" + element.ProductId + "</td>";
+         content += "<td>" + element.Product + "</td>";
+         content += "<td>" + element.Operation + "</td>";
+         content += "<td>" + element.Date + "</td>";
+         content += "<td>" + element.Phone + "</td>";
+         content += "<td>" + element.Count + "</td>";
+         content += "<td>" + element.ShipmentId + "</td>";
+         content += "<td>" + element.InvoiceId + "</td>";
+         content += "<td>" + element.Recipient + "</td>";
+         content += "<td>" + element.Address + "</td>";
+         count += "</tr>"
+      }
+      );
+      return content;
+}
 const url = "https://basiccrudcs519api.azure-api.net/cosmos-function-app/get-list";
 fetch(url, requestOptions).then(
    response => response.json()
-).then(data =>document.getElementById('main-page').innerText=data).catch(err => 
+).then(data =>document.getElementById('main-page').innerHTML=loadData(data)).catch(err => 
    console.log(err))
 //"ProductId" "Product" "Operation" "ShipmentId" "Date" "Count" "InvoiceId" "Recipient" "Address" "Phone"
 /*
