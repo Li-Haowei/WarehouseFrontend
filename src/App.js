@@ -3,7 +3,7 @@ import React, { useState} from 'react';
 
 
 function App() {
-const [warehouse, setWarehouse] = useState({});
+const [warehouse, setWarehouse] = useState([]);
 
 
 
@@ -39,7 +39,7 @@ function createTable(data){
 }
 return (
 <div id='main-page'>
-   {JSON.stringify(warehouse) !== '{}'?
+   {JSON.stringify(warehouse) !== '[]'?
    <>
    <table>
       <thead>
