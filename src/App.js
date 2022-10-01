@@ -13,12 +13,59 @@ const requestOptions = {
 const url = "https://basiccrudcs519api.azure-api.net/cosmos-function-app/get-list";
 fetch(url, requestOptions).then(
    response => response.json()
-).then(data =>console.log(data)).catch(err => 
+).then(data => createTable(data)).catch(err => 
    console.log(err))
-//"ProductId" "Product" "Operation" "ShipmentId" "Date" "Count" "InvoiceId" "Recipient" "Address" "Phone"
+const createTable = (data) => {
+   setWarehouse(data);
+   var content = "";
+   warehouse.forEach(element => {
+      content += "<tr>";
+      content += "<td>" + element._id + "</td>";
+      content += "<td>" + element.ProductId + "</td>";
+      content += "<td>" + element.Product + "</td>";
+      content += "<td>" + element.Operation + "</td>";
+      content += "<td>" + element.Date + "</td>";
+      content += "<td>" + element.Phone + "</td>";
+      content += "<td>" + element.Count + "</td>";
+      content += "<td>" + element.ShipmentId + "</td>";
+      content += "<td>" + element.InvoiceId + "</td>";
+      content += "<td>" + element.Recipient + "</td>";
+      content += "<td>" + element.Address + "</td>";
+      count += "</tr>"
+
+   });
+   document.getElementById('warehouse-table-body').innerHTML = content;
+}
 return (
 <div id='main-page'>
-   
+   {JSON.stringify(warehouse) !== '{}'?
+   <>
+   <table>
+      <thead>
+         <tr>
+            <th>ID</th>
+            <th>ProductId</th>
+            <th>Product</th>
+            <th>Operation</th>
+            <th>Date</th>
+            <th>Phone</th>
+            <th>Count</th>
+            <th>ShipmentId</th>
+            <th>InvoiceId</th>
+            <th>Recipient</th>
+            <th>Address</th>
+         </tr>
+      </thead>
+      <tbody id='warehouse-table-body'>
+        
+      </tbody>
+   </table>
+   </>
+   :
+   <>
+   <p>Loading Data</p>
+   </>
+   }
 </div>
 
 );
