@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useState} from 'react';
-import ReactHTMLParser from 'react-htmlParser'
 
 
 function App() {
@@ -73,11 +72,10 @@ return (
 <div id='main-page'>
 {JSON.stringify(warehouse) !== '[]'?
    <>
-   
+      {warehouse}
    </>
    :
    <>
-   {ReactHTMLParser(warehouse)}
    </>
 }
 </div>
