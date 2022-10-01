@@ -3,26 +3,18 @@
   display: grid;
 	place-items: center
 }
-#multipleOptions{
-  display: table 
-}
-#multipleOptions input{
-  display: table-cell
-}
 table {
-  width: 40%;
+  width: 100%;
   text-align: center;
+  border: 1px solid black;
+  background-color: black;
+  color: white;
 }
-.final-value {
-  display: table-cell;
-  width: 500px;
+table td {
+  border: 1px solid white;
+  white-space: nowrap;
 }
-#submitFinalForm{
-  position: fixed;
-  top: 5%;
-  right: 5%;
-  width: 100px;
-  height: 100px;
-  background-color: rgb(57, 164, 80);
-  border-radius: 50%;
+table th {
+  border: 1px solid white;
+  white-space: nowrap;
 }
