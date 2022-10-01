@@ -14,19 +14,16 @@ function loadData(data){
    var content = "";
    data.forEach(element =>
       {
-         content += "<tr>";
-         content += "<td>" + element._id + "</td>";
-         content += "<td>" + element.ProductId + "</td>";
-         content += "<td>" + element.Product + "</td>";
-         content += "<td>" + element.Operation + "</td>";
-         content += "<td>" + element.Date + "</td>";
-         content += "<td>" + element.Phone + "</td>";
-         content += "<td>" + element.Count + "</td>";
-         content += "<td>" + element.ShipmentId + "</td>";
-         content += "<td>" + element.InvoiceId + "</td>";
-         content += "<td>" + element.Recipient + "</td>";
-         content += "<td>" + element.Address + "</td>";
-         count += "</tr>"
+         content +=  element._id 
+         content +=  element.ProductId 
+         content +=  element.Product 
+         content +=  element.Operation 
+         content +=  element.Date 
+         content +=  element.Count 
+         content +=  element.ShipmentId 
+         content +=  element.InvoiceId 
+         content +=  element.Recipient 
+         content +=  element.Address 
       }
       );
       return content;
