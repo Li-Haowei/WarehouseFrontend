@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState} from 'react';
+import ReactHTMLParser from 'react-htmlParser'
 
 
 function App() {
@@ -15,7 +16,6 @@ fetch(url, requestOptions).then(
    response => response.json()
 ).then(data =>setWarehouse(data)).catch(err => 
    console.log(err))
-console.log(warehouse)
 //"ProductId" "Product" "Operation" "ShipmentId" "Date" "Count" "InvoiceId" "Recipient" "Address" "Phone"
 /*
 function createTable(data){
@@ -71,8 +71,16 @@ function createTable(data){
 */
 return (
 <div id='main-page'>
+{JSON.stringify(warehouse) !== '[]'?
+   <>
+   
+   </>
+   :
+   <>
+   {ReactHTMLParser(warehouse)}
+   </>
+}
 </div>
-
 );
 }
 export default App;
