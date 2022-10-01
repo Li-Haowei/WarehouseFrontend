@@ -13,9 +13,10 @@ const requestOptions = {
 const url = "https://basiccrudcs519api.azure-api.net/cosmos-function-app/get-list";
 fetch(url, requestOptions).then(
    response => response.json()
-).then(data => setWarehouse(data)).catch(err => 
+).then(data =>createTable(data)).catch(err => 
    console.log(err))
-const createTable = (data) => {
+//"ProductId" "Product" "Operation" "ShipmentId" "Date" "Count" "InvoiceId" "Recipient" "Address" "Phone"
+function createTable(data){
    setWarehouse(data);
    var content = "";
    warehouse.forEach(element => {
@@ -56,7 +57,7 @@ return (
             <th>Address</th>
          </tr>
       </thead>
-      <tbody id='warehouse-table-body'>
+      <tbody id='WableBody'>
         
       </tbody>
    </table>
