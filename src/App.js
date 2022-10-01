@@ -13,8 +13,9 @@ const requestOptions = {
 const url = "https://basiccrudcs519api.azure-api.net/cosmos-function-app/get-list";
 fetch(url, requestOptions).then(
    response => response.json()
-).then(data =>console.log(data)).catch(err => 
+).then(data =>setWarehouse(data)).catch(err => 
    console.log(err))
+console.log(warehouse)
 //"ProductId" "Product" "Operation" "ShipmentId" "Date" "Count" "InvoiceId" "Recipient" "Address" "Phone"
 /*
 function createTable(data){
