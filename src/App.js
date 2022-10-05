@@ -71,7 +71,7 @@ function loadData(data){
       content += "</table>"
       return content;
 }
-const url = "https://cosmos-function-app.azurewebsites.net/api/get-list?code=eMsR2mRXKVx6TrRyQiWTmXkPICVjxtoL4Cc5QwW7eFJO26XdAScWdQ==&clientId=apim-basiccrudcs519API";
+const url = "get-list url + api key";
 fetch(url, requestOptions).then(
    response => response.json()
 ).then(data =>  {document.getElementById('main-page').innerHTML=loadData(data);
