@@ -91,6 +91,8 @@ if(document.getElementById('get-warehouse')){
       document.getElementById('main-page').innerHTML=loadData(warehouse);
       document.getElementById('get-summary').className = "";
       document.getElementById('get-warehouse').className = "active";
+      document.getElementById('operation').onclick = function(){sortTable(3);}
+      document.getElementById('productid').onclick = function(){sortTable(1);}
    }
 }
 
