@@ -9,7 +9,7 @@ const [warehouse, setWarehouse] = useState([]);
 const requestOptions = {
    method: 'POST'
 }
-
+var dict = {};
 function sortTable(index){
    var table, rows, switching, i, x, y, shouldSwitch;
    table = document.getElementById('warehouse');
@@ -43,7 +43,6 @@ function loadData(data){
    content += "<table id='warehouse'>"
    content += "<thead>"
    content += "<tr>"
-   content += "<th>ID</th>"
    content += "<th>ProductId<button id='productid'>SORT</button></th>"
    content += "<th>Product</th>"
    content += "<th>Operation<button id='operation'>SORT</button></th>"
@@ -59,7 +58,6 @@ function loadData(data){
    data.forEach(element =>
       {
          content += "<tr>";
-         content += "<td>" + element._id + "</td>";
          content += "<td>" + element.ProductId + "</td>";
          content += "<td>" + element.Product + "</td>";
          content += "<td>" + element.Operation + "</td>";
@@ -99,7 +97,6 @@ if(document.getElementById('get-warehouse')){
 
 function displaySummary(){
    
-   console.log('clicked')
    /*If table id warehouse exists, remove it*/
    if(document.getElementById('warehouse')){
       document.getElementById('warehouse').remove();
@@ -117,53 +114,69 @@ function displaySummary(){
    content += "<th>Quantity On Hand</th>"
    content += "</tr>"
    content += "</thead>"
-   var dict = {};
    warehouse.forEach(element =>
       {
          /*Count the number of operation for each product on the same date*/
          if(dict[element.Date] == undefined){
-            //dict[element.Date] = {"ProductId": element.ProductId, "Quantity Received": element.Product, "Quantity Shipped": element.Operation, "Quantity Returned": element.Count};
-            if(element.Operation == "Received"){
-               dict[element.Date] = {"Product Name": element.Product, "ProductId": element.ProductId, "Quantity Received": element.Count, "Quantity Shipped": 0, "Quantity Returned": 0};
-            }else if (element.Operation == "Shipped"){
-               dict[element.Date] = {"Product Name": element.Product, "ProductId": element.ProductId, "Quantity Received": 0, "Quantity Shipped": element.Count, "Quantity Returned": 0};
-            }else if (element.Operation == "Returned"){
-               dict[element.Date] = {"Product Name": element.Product, "ProductId": element.ProductId, "Quantity Received": 0, "Quantity Shipped": 0, "Quantity Returned": element.Count};
+            /*check if product name under the date is in the dict*/
+            
+            /*initialize the dict*/
+            dict[element.Date] = {};
+            if(dict[element.Date][element.Product] == undefined){
+               if(element.Operation == "Received"){
+                  dict[element.Date][element.Product] = {"ProductId": element.ProductId, "Quantity Received": element.Count, "Quantity Shipped": 0, "Quantity Returned": 0};
+               }else if (element.Operation == "Shipped"){
+                  dict[element.Date][element.Product] = {"ProductId": element.ProductId, "Quantity Received": 0, "Quantity Shipped": element.Count, "Quantity Returned": 0};
+               }
+               else if (element.Operation == "Returned"){
+                  dict[element.Date][element.Product] = {"ProductId": element.ProductId, "Quantity Received": 0, "Quantity Shipped": 0, "Quantity Returned": element.Count};
+               }
             }
+
+
          }else{
-            if(element.Operation == "Received"){
-               dict[element.Date]["Quantity Received"] += element.Count;
-            }else if (element.Operation == "Shipped"){
-               dict[element.Date]["Quantity Shipped"] += element.Count;
-            }else if (element.Operation == "Returned"){
-               dict[element.Date]["Quantity Returned"] += element.Count;
+            if(dict[element.Date][element.Product] == undefined){
+               if(element.Operation == "Received"){
+                  dict[element.Date][element.Product] = {"ProductId": element.ProductId, "Quantity Received": element.Count, "Quantity Shipped": 0, "Quantity Returned": 0};
+               }else if (element.Operation == "Shipped"){
+                  dict[element.Date][element.Product] = {"ProductId": element.ProductId, "Quantity Received": 0, "Quantity Shipped": element.Count, "Quantity Returned": 0};
+               }
+               else if (element.Operation == "Returned"){
+                  dict[element.Date][element.Product] = {"ProductId": element.ProductId, "Quantity Received": 0, "Quantity Shipped": 0, "Quantity Returned": element.Count};
+               }
+            }else{
+               if(element.Operation == "Received"){
+                  dict[element.Date][element.Product]["Quantity Received"] += element.Count;
+               }else if (element.Operation == "Shipped"){
+                  dict[element.Date][element.Product]["Quantity Shipped"] += element.Count;
+               }
+               else if (element.Operation == "Returned"){
+                  dict[element.Date][element.Product]["Quantity Returned"] += element.Count;
+               }
             }
          }
       }
       );
+   
       /*Loop through the dictionary and create HTML*/
-      for (var key in dict) {
-         if (dict.hasOwnProperty(key)) {
-            /*a row display the key value*/
+      for(var date in dict){
+         content += "<tr><td>" + date + "</td></tr>";
+         for(var product in dict[date]){
             content += "<tr>";
-            content += "<td>" + key + "</td>";
-            content += "</tr>";
-            content += "<tr>";
-            content += "<td>" + " " + "</td>";
-            content += "<td>" + dict[key]["Product Name"] + "</td>";
-            content += "<td>" + dict[key]["ProductId"] + "</td>";
-            content += "<td>" + dict[key]["Quantity Received"] + "</td>";
-            content += "<td>" + dict[key]["Quantity Shipped"] + "</td>";
-            content += "<td>" + dict[key]["Quantity Returned"] + "</td>";
-            content += "<td>" + (dict[key]["Quantity Received"] - dict[key]["Quantity Shipped"] - dict[key]["Quantity Returned"]) + "</td>";
+            content += "<td> </td>";
+            content += "<td>" + product + "</td>";
+            content += "<td>" + dict[date][product]["ProductId"] + "</td>";
+            content += "<td>" + dict[date][product]["Quantity Received"] + "</td>";
+            content += "<td>" + dict[date][product]["Quantity Shipped"] + "</td>";
+            content += "<td>" + dict[date][product]["Quantity Returned"] + "</td>";
+            content += "<td>" + (dict[date][product]["Quantity Received"] - dict[date][product]["Quantity Shipped"] - dict[date][product]["Quantity Returned"]) + "</td>";
             content += "</tr>"
          }
       }
-
       content += "</table>"
       return content;
-      
-}
+   }      
+
 
 const url = "https://cosmos-function-app.azurewebsites.net/api/get-list?code=eMsR2mRXKVx6TrRyQiWTmXkPICVjxtoL4Cc5QwW7eFJO26XdAScWdQ==&clientId=apim-basiccrudcs519API";
 /*
