@@ -178,7 +178,7 @@ function displaySummary(){
    }      
 
 
-const url = "https://cosmos-function-app.azurewebsites.net/api/get-list?code=eMsR2mRXKVx6TrRyQiWTmXkPICVjxtoL4Cc5QwW7eFJO26XdAScWdQ==&clientId=apim-basiccrudcs519API";
+const url = "API String";
 /*
 fetch(url, requestOptions).then(
    response => response.json()
